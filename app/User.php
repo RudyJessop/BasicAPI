@@ -36,6 +36,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password', 'remember_token'
     ];
 
+    /**
+     * Declaring date attributes
+     * @var [type]
+     */
     protected $dates = [
         'created_at', 'updated_at'
     ];

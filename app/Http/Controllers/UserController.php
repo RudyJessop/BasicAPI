@@ -17,7 +17,7 @@ class UserController extends Controller
     }
 
     /**
-     * [index description]
+     * All users response
      * @return [type] [description]
      */
     public function index(){
@@ -41,7 +41,7 @@ class UserController extends Controller
     }
 
     /**
-     * [show description]
+     * Specific user response
      * @return [type] [description]
      */
     public function show($id){
@@ -64,7 +64,7 @@ class UserController extends Controller
     }
 
     /**
-     * [destroy description]
+     * Deleting Specific User Response
      * @return [type] [description]
      */
     public function destroy(){

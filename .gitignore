@@ -1,0 +1,5 @@
+.vagrant
+/vendor
+/.idea
+.env
+/node_modules

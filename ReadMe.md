@@ -1,4 +1,6 @@
 # Basic API
+[![Build Status](https://travis-ci.org/RudyJessop/BasicAPI.svg?branch=master)](https://travis-ci.org/RudyJessop/BasicAPI)
+[![Software License](https://img.shields.io/badge/License-EPL-green.svg?style=flat-square)](License.md)
 
 **You own REST API**
 

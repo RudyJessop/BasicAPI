@@ -43,4 +43,24 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $dates = [
         'created_at', 'updated_at'
     ];
+
+    /**
+     * Returns Valued username
+     * @param  [type] $query [description]
+     * @param  [type] $value [description]
+     * @return [type]        [description]
+     */
+    public function scopeUsername($query, $value){
+        return $query->where('username', $value)->first();
+    }
+
+    /**
+     * Returns Valued Email
+     * @param  [type] $query [description]
+     * @param  [type] $value [description]
+     * @return [type]        [description]
+     */
+    public function scopeEmail($query, $value){
+        return $query->where('email', $value)->first();
+    }
 }

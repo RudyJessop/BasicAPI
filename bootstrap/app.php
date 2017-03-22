@@ -28,6 +28,13 @@ $app->withFacades();
 $app->withEloquent();
 
 
+/**
+ * Adding Facades
+ */
+
+// class_alias(path_to_class::class, 'FacadeName');
+
+
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -83,6 +90,10 @@ $app->routeMiddleware([
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
+
+// Package Service Providers
+
+
 
 /*
 |--------------------------------------------------------------------------

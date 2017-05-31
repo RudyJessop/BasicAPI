@@ -16,7 +16,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // Can Use this for singular seeder
         $this->call(UserSeeder::class);
+
+        // Once application gets complex use this foreach
+        // foreach($this->seeders as $seedClasses){
+        //     $this->call($seedClasses);
+        // }
     }
 
 }

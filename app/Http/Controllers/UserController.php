@@ -3,17 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use CTL\JWTBase;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    protected $jwt;
+
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(JWTBase $jwt)
     {
-        // $this->middleware('auth')
+        $this->jwt = $jwt;
+        $this->middleware('auth');
     }
 
     /**

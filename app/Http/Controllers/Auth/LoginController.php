@@ -20,20 +20,19 @@ class LoginController extends Controller
     public function __construct(JWTBase $jwt)
     {
         $this->jwt = $jwt;
+        $this->middleware('auth');
     }
 
     /**
      * Gets the Auth User
-     * @return [type] [description]
+     * @return void
      */
     public function login(Request $request, User $user){
         //TODO: Recieving JWT
+        $token = $this->jwt->parseJWTClaim($request->header('x-access-token') );
+        $un = json_decode(json_encode($token['username']), true);
+        $pw = json_decode(json_encode($token['password']), true);
 
-
-
-        // Input Values
-        $un = $request->input('username');
-        $pw = $request->input('password');
 
         // Query User Object
         $query = $user->username($un);
@@ -41,7 +40,15 @@ class LoginController extends Controller
         // Validation, response and catching errors
         try{
             if($query && password_verify($pw, $query->password)){
-            return $this->jwt->buildJWTtoken($query->id, $query->toArray());
+
+            $token = $this->jwt->buildJWTtoken($query->id, $query->toArray());
+
+            return response()->json([
+                'success' => [
+                    'message' => 'Successful Login',
+                    'Token' => $token,
+                ]
+            ],200);
             }else{
                 return response()->json([
                     'error' =>[
@@ -53,7 +60,8 @@ class LoginController extends Controller
         }catch(\Exception $e){
             return response()->json([
                 'error' =>[
-                    'message' => 'Couldnt find token'
+                    'message' => 'Internal Server Error',
+                    'code' => '11'
                 ]
             ], 500);
         }

@@ -18,6 +18,17 @@ class JWTtokenTest extends APITesting{
   }
 
   /**
+   * Test JWT Claims
+   * @return [type] [description]
+   */
+  public function test_token_claim(){
+    $jwt = new JWTBase;
+    $token = $this->createToken();
+
+    $this->assertNotNull($jwt->parseJWTClaim($token));
+  }
+
+  /**
    * Test Token Validation
    * @return [type] [description]
    */

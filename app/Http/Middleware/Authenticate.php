@@ -3,26 +3,28 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use CTL\JWTBase;
 use Illuminate\Contracts\Auth\Factory as Auth;
 
 class Authenticate
 {
+
     /**
-     * The authentication guard factory instance.
+     * The JSON web token interface
      *
-     * @var \Illuminate\Contracts\Auth\Factory
+     * @var \CTL\JWTBase;
      */
-    protected $auth;
+    protected $jwt;
 
     /**
      * Create a new middleware instance.
      *
-     * @param  \Illuminate\Contracts\Auth\Factory  $auth
+     * @param  \CTL\JWTBase $jwt
      * @return void
      */
-    public function __construct(Auth $auth)
+    public function __construct(JWTBase $jwt)
     {
-        $this->auth = $auth;
+        $this->jwt = $jwt;
     }
 
     /**
@@ -35,8 +37,15 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($this->auth->guard($guard)->guest()) {
-            return response('Unauthorized.', 401);
+        $passedToken = $this->jwt->validateJWTtoken($request->header('x-access-token') );
+
+        if(empty($passedToken) ){
+            return response()->json([
+                'error' => [
+                    'message' => 'Token Missing',
+                    'code' => '100'
+                ]
+            ], 403);
         }
 
         return $next($request);

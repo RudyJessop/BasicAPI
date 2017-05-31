@@ -12,9 +12,9 @@ class JWTBase {
 
     /**
      * Creates new tokens for returning users
-     * @param  [type] $uid  [description]
-     * @param  [type] $user [description]
-     * @return [type]       [description]
+     * @param  int $uid
+     * @param  array $user
+     * @return string
      */
     public function buildJWTtoken($uid, $user){
     $signer = new Sha256();
@@ -31,6 +31,20 @@ class JWTBase {
             ->getToken();
 
         return $token;
+    }
+
+    /**
+     * Consumes imcoming token and returns set claim
+     * @param  string $token
+     * @return array
+     */
+    public function parseJWTClaim($token){
+        $parse = (new Parser() )->parse((string) $token);
+
+        if(empty($parse)){
+            throw new Exception;
+        }
+        return $parse->getClaims();
     }
 
     /**

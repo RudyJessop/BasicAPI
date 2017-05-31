@@ -14,10 +14,15 @@
 
 $app->group(['prefix' => 'api/v1'], function($app){
 
-  //Auth
-  $app->get('login', 'Auth\LoginController@login');
+  /**
+   * Auth
+   */
+  $app->post('login', 'Auth\LoginController@login');
+  $app->post('register', 'Auth\RegisterController@register');
 
-  //User
+  /**
+   * User
+   */
   $app->get('/users/', 'UserController@index');
   $app->get('/users/{id}', 'UserController@show');
 
